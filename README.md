@@ -50,8 +50,10 @@ Votre programme doit retourner le montant converti dans la devise cible arrondi 
 ## Taches
 
   - [x] Créer le projet console sous Visual Studio
-  - [ ] Créer la bibliothèque des types & la bibliothèque des tests sur les types
+  - [x] Créer la bibliothèque des types & la bibliothèque des tests sur les types
   - [ ] Implémenter le montant
+  - [x] Implémenter le taux
+  - [ ] Implémenter la devise
   - [ ] Implémenter le taux de change
   - [ ] Implémenter le service de conversion
   - [ ] Implementer le parser de contenu pour la demande de conversion
