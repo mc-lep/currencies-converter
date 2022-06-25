@@ -1,4 +1,6 @@
-﻿namespace LuccaDevises.Types
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LuccaDevises.Types
 {
     /// <summary>
     /// Une devise
@@ -26,5 +28,50 @@
 
             IsoCode = isoCode.ToUpperInvariant();
         }
+
+        /// <summary>
+        /// Retourne la représentation de la devisse sous forme de chaine de caractères 
+        /// </summary>
+        /// <returns>Une chaien de caractère représentant la devise</returns>
+        public override string ToString()
+        {
+            return IsoCode;
+        }
+
+        /// <summary>
+        /// Indique si l'objet passé en paramètre est égal à la devise
+        /// </summary>
+        /// <param name="obj">L'objet à comparer</param>
+        /// <returns><Vrai si <paramref name="obj"/> est égal à la devise</returns>
+        public override bool Equals([NotNullWhen(true)] object? obj)
+        {
+            if (obj is Currency currency)
+                return Equals(currency);
+            
+            return false;
+        }
+
+        /// <summary>
+        /// Retourne le code de Hashage pour la devise
+        /// </summary>
+        /// <returns>Le code de hashage</returns>
+        public override int GetHashCode()
+        {
+            return IsoCode.GetHashCode();
+        }
+
+        /// <summary>
+        /// Indique si la devise passée en paramèter est égale à la devise
+        /// </summary>
+        /// <param name="currency">La devise à comparer</param>
+        /// <returns>Vrai si <paramref name="currency"/> est égale à la devise</returns>
+        public bool Equals(Currency currency)
+        {
+            return IsoCode == currency.IsoCode;
+        }
+
+        public static bool operator ==(Currency c1, Currency c2) => c1.Equals(c2);
+        
+        public static bool operator !=(Currency c1, Currency c2) => !c1.Equals(c2);
     }
 }
