@@ -55,7 +55,7 @@ Votre programme doit retourner le montant converti dans la devise cible arrondi 
   - [x] Implémenter le taux
   - [x] Implémenter la devise
   - [x] Implémenter le taux de change
-  - [ ] Implémenter le service de conversion
+  - [x] Implémenter le service de conversion
   - [ ] Implementer le parser de contenu pour la demande de conversion
   - [ ] Implémenter le parser de contenu pour les taux de changes
   - [ ] Implémenter le programme de conversion

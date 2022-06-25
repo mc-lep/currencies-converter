@@ -47,6 +47,22 @@
         }
 
         /// <summary>
+        /// Obtient l'autre devise du taux de change
+        /// </summary>
+        /// <param name="currency">La devise à interroger</param>
+        /// <returns>L'autre devise du taux de change par rapport à la <paramref name="currency"/></returns>
+        /// <exception cref="ArgumentOutOfRangeException">Exception </exception>
+        public Currency Other(Currency currency)
+        {
+            if (currency == From)
+                return To;
+            else if (currency == To)
+                return From;
+
+            throw new ArgumentOutOfRangeException(nameof(currency), "La devise demandée n'est pas connue du taux de change");
+        }
+
+        /// <summary>
         /// Indique si le taux change peut convertir depuis une des deux devises vers l'autre devise
         /// </summary>
         /// <param name="c1">Le première devise</param>
@@ -71,6 +87,15 @@
                 return new Amount(amount.Value * new Rate(1m / Rate.Value).Value, From);
 
             throw new ArgumentOutOfRangeException(nameof(amount), "Impossible de convertir le montant car il est dans une devise inconnue du taux de change");
+        }
+
+        /// <summary>
+        /// Représente le taux de change sous forme de chaine de caractères
+        /// </summary>
+        /// <returns>Une chaine de caractère représentant le taux de change</returns>
+        public override string ToString()
+        {
+            return $"({From}) --> {To}) : {Rate}";
         }
     }
 }

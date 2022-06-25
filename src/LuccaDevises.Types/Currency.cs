@@ -7,6 +7,8 @@ namespace LuccaDevises.Types
     /// </summary>
     public readonly struct Currency
     {
+        public static readonly Currency Empty = new("   ");
+
         /// <summary>
         /// Obtient le code ISO de la devise
         /// </summary>
