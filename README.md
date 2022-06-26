@@ -58,4 +58,4 @@ Votre programme doit retourner le montant converti dans la devise cible arrondi 
   - [x] Implémenter le service de conversion
   - [x] Implementer le parser de contenu pour la demande de conversion
   - [x] Implémenter le parser de contenu pour les taux de changes
-  - [ ] Implémenter le programme de conversion
+  - [x] Implémenter le programme de conversion
