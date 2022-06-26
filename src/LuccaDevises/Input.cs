@@ -16,5 +16,10 @@ namespace LuccaDevises
         /// La devise vers laquelle il faut convertir le montant
         /// </summary>
         public Currency TargetCurrency { get; set; }
+
+        /// <summary>
+        /// Le nombre de ligne de taux de change déclaré 
+        /// </summary>
+        public int DeclaredExchangeRatesCount { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace LuccaDevises
     public sealed class InputBuilder : IDisposable 
     {
         private readonly TextReader _inputStream;
-        private readonly Input _input = new Input();
-
+        private readonly Input _input = new();
+        
         /// <summary>
         /// Fabrique les données d'entrée depuis un flux texte
         /// </summary>
@@ -40,7 +40,8 @@ namespace LuccaDevises
         private Input Build()
         {
             ExtractDataFromFirstLine();
-            
+            ExtractDataFromSecondLine();
+
             return _input;
         }
 
@@ -53,7 +54,7 @@ namespace LuccaDevises
             var line = _inputStream.ReadLine();
             if (line == null)
             {
-                throw new InvalidDataException("La première vide ne doit pas être vide");
+                throw new InvalidDataException("La première ligne ne doit pas être vide");
             }
 
             var lineParts = line.Split(';');
@@ -62,13 +63,32 @@ namespace LuccaDevises
                 throw new InvalidDataException("La première ligne du fichier est mal formée, elle doit être de la forme CUR;AMT;CUR");
             }
 
-            if (!int.TryParse(lineParts[1], out var amount))
+            if (!int.TryParse(lineParts[1].Trim(), out var amount))
             {
                 throw new InvalidDataException("La première ligne contient un montant mal formé, il doit être sous forme d'entier");
             }
 
-            _input.InitialAmount = new Amount(amount, lineParts[0]);
-            _input.TargetCurrency = new Currency(lineParts[2]);
+            _input.InitialAmount = new Amount(amount, lineParts[0].Trim());
+            _input.TargetCurrency = new Currency(lineParts[2].Trim());
+        }
+
+        /// <summary>
+        /// Lit la seconde ligne du flux et analyse les données
+        /// </summary>
+        private void ExtractDataFromSecondLine()
+        {
+            var line = _inputStream.ReadLine();
+            if (line == null)
+            {
+                throw new InvalidDataException("La seconde ligne ne doit pas être vide");
+            }
+
+            if (!int.TryParse(line.Trim(), out var count))
+            {
+                throw new InvalidDataException("La seconde ligne contient un nombre mal formé, il doit être sous forme d'entier");
+            }
+
+            _input.DeclaredExchangeRatesCount = count;
         }
 
         public void Dispose() => _inputStream.Dispose();
