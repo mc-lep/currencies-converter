@@ -18,8 +18,21 @@ namespace LuccaDevises
         public Currency TargetCurrency { get; set; }
 
         /// <summary>
-        /// Le nombre de ligne de taux de change déclaré 
+        /// Le nombre de ligne de taux de change déclaré dans les données d'entrée
         /// </summary>
         public int DeclaredExchangeRatesCount { get; set; }
+
+        /// <summary>
+        /// Les taux de changes à utiliser pour la conversion
+        /// </summary>
+        public List<ExchangeRate> ExchangeRates { get; set; }
+
+        /// <summary>
+        /// Initialise les données d'entrée
+        /// </summary>
+        public Input()
+        {
+            ExchangeRates = new List<ExchangeRate>();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Types;
+using System.Globalization;
 
 namespace LuccaDevises
 {
@@ -39,8 +40,13 @@ namespace LuccaDevises
         /// <returns>Le données d'entrée pour le traitement de conversion</returns>
         private Input Build()
         {
-            ExtractDataFromFirstLine();
-            ExtractDataFromSecondLine();
+            ReadNextLineAndExtractUserInput();
+            ReadNextLineAndExtractExchangeRatesCount();
+
+            for(var i = 0; i < _input.DeclaredExchangeRatesCount; i++)
+            {
+                ReadNextLineAndExtractExchangeRate();
+            }
 
             return _input;
         }
@@ -49,7 +55,7 @@ namespace LuccaDevises
         /// Lit la première ligne du flux et analyse les données
         /// </summary>
         /// <exception cref="InvalidDataException">La première ligne du flux est mal formée</exception>
-        private void ExtractDataFromFirstLine()
+        private void ReadNextLineAndExtractUserInput()
         {
             var line = _inputStream.ReadLine();
             if (line == null)
@@ -75,12 +81,13 @@ namespace LuccaDevises
         /// <summary>
         /// Lit la seconde ligne du flux et analyse les données
         /// </summary>
-        private void ExtractDataFromSecondLine()
+        /// <exception cref="InvalidDataException">La seconde ligne du flux est mal formée</exception>
+        private void ReadNextLineAndExtractExchangeRatesCount()
         {
             var line = _inputStream.ReadLine();
-            if (line == null)
+            if (string.IsNullOrWhiteSpace(line))
             {
-                throw new InvalidDataException("La seconde ligne ne doit pas être vide");
+                return;
             }
 
             if (!int.TryParse(line.Trim(), out var count))
@@ -89,6 +96,32 @@ namespace LuccaDevises
             }
 
             _input.DeclaredExchangeRatesCount = count;
+        }
+
+        /// <summary>
+        /// Lit la prochaineligne du flux et extrait un taux de change
+        /// </summary>
+        /// <exception cref="InvalidDataException"></exception>
+        private void ReadNextLineAndExtractExchangeRate()
+        {
+            var line = _inputStream.ReadLine();
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                return;
+            }
+
+            var lineParts = line.Split(';');
+            if (lineParts.Length != 3)
+            {
+                throw new InvalidDataException("La ligne de taux de change est mal formée, elle doit être de la forme CUR;CUR;TAUX");
+            }
+
+            if (!decimal.TryParse(lineParts[2].Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out var rate))
+            {
+                throw new InvalidDataException("La ligne de taux de change contient un taux mal formé, il doit être sous forme de decimal");
+            }
+
+            _input.ExchangeRates.Add(new ExchangeRate(lineParts[0].Trim(), lineParts[1].Trim(), rate));
         }
 
         public void Dispose() => _inputStream.Dispose();
