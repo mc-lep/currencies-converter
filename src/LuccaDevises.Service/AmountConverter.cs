@@ -30,11 +30,11 @@ namespace LuccaDevises.Services
         }
 
         /// <summary>
-        /// Converti un montant depuis une devise vers la devise cible
+        /// Converti un montant vers la devise cible
         /// </summary>
         /// <param name="initial">Le montant initial</param>
         /// <param name="to">La devise cible</param>
-        /// <returns>Le montant de la devise initiale converti vers la devise cible</returns>
+        /// <returns>Le montant initial converti vers la devise cible</returns>
         /// <exception cref="InvalidOperationException"></exception>
         public Amount Convert(Amount initial, Currency to)
         {

@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LuccaDevises.Service\LuccaDevises.Services.csproj" />
     <ProjectReference Include="..\LuccaDevises.Types\LuccaDevises.Types.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
