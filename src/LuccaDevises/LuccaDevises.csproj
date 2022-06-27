@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LuccaDevises.Service\LuccaDevises.Services.csproj" />
+    <ProjectReference Include="..\LuccaDevises.Services\LuccaDevises.Services.csproj" />
     <ProjectReference Include="..\LuccaDevises.Types\LuccaDevises.Types.csproj" />
   </ItemGroup>
 
