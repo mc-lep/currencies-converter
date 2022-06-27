@@ -47,10 +47,7 @@ namespace LuccaDevises.Types
         /// <returns><Vrai si <paramref name="obj"/> est égal à la devise</returns>
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            if (obj is Currency currency)
-                return Equals(currency);
-            
-            return false;
+            return obj is Currency currency && Equals(currency);
         }
 
         /// <summary>

@@ -7,8 +7,7 @@ namespace LuccaDevises.Services
     /// </summary>
     public class AmountConverter
     {
-        private readonly List<ExchangeRate> _exchangeRates;
-        private readonly ExchangeRatesGraph _currencyGraph;
+        private readonly ExchangeRatesGraph _exchangeRatesGraph;
 
         /// <summary>
         /// Initialise un nouveau convertisseur
@@ -16,16 +15,13 @@ namespace LuccaDevises.Services
         /// <param name="exchangeRates">La liste des taux de changes à utiliser pour la conversion</param>
         public AmountConverter(IEnumerable<ExchangeRate> exchangeRates)
         {
-            _exchangeRates = new List<ExchangeRate>();
-
             if (exchangeRates != null)
             {
-                _exchangeRates.AddRange(exchangeRates);
-                _currencyGraph = new ExchangeRatesGraph(exchangeRates);
+                _exchangeRatesGraph = new ExchangeRatesGraph(exchangeRates);
             }
             else
             {
-                _currencyGraph = new ExchangeRatesGraph(new List<ExchangeRate>());
+                _exchangeRatesGraph = new ExchangeRatesGraph(new List<ExchangeRate>());
             }
         }
 
@@ -65,7 +61,7 @@ namespace LuccaDevises.Services
             while (currencyQueue.Count > 0)
             {
                 var currentNode = currencyQueue.Dequeue();
-                foreach (var exchangeRate in _currencyGraph.GetExchangeRatesFor(currentNode.Value))
+                foreach (var exchangeRate in _exchangeRatesGraph.GetExchangeRatesFor(currentNode.Value))
                 {
                     var nextCurrency = exchangeRate.Other(currentNode.Value);
                     var nextNode = currencyPath.GetOrCreateNodeFor(nextCurrency);
@@ -107,7 +103,7 @@ namespace LuccaDevises.Services
                     break;
                 }
 
-                var rates = _currencyGraph.GetExchangeRatesFor(currentNode.Value);
+                var rates = _exchangeRatesGraph.GetExchangeRatesFor(currentNode.Value);
                 var rate = rates.FirstOrDefault(r => r.CanConvert(currentNode.Value, currentNode.Previous.Value));
                 list.Add(rate);
 

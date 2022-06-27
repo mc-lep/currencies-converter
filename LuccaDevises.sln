@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Types", "src\L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Types.UnitTests", "tests\LuccaDevises.Types.UnitTests\LuccaDevises.Types.UnitTests.csproj", "{E789D832-DDA3-4BC2-A6E4-D4705B9E5882}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Services", "src\LuccaDevises.Service\LuccaDevises.Services.csproj", "{288582ED-84BF-4AE1-B124-2A9E00E5B71D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Services", "src\LuccaDevises.Services\LuccaDevises.Services.csproj", "{288582ED-84BF-4AE1-B124-2A9E00E5B71D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Services.UnitTests", "tests\LuccaDevises.Services.UnitTests\LuccaDevises.Services.UnitTests.csproj", "{1EF01BA6-F541-442F-83E4-CAEF1A40CE60}"
 EndProject

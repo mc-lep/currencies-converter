@@ -46,5 +46,21 @@
 
             Assert.Equal(new Currency("EUR"), result);
         }
+
+        [Fact]
+        public void Equals_ShouldBeFalse_WithNullValue()
+        {
+            var instance = new Amount(1.234m, "EUR");
+            
+            Assert.False(instance.Equals(null));
+        }
+
+        [Fact]
+        public void Equals_ShouldBeTrue_WithSameValues()
+        {
+            var instance = new Amount(1.234m, "EUR");
+
+            Assert.True(instance.Equals(new Amount(1.234m, "EUR")));
+        }
     }
 }
